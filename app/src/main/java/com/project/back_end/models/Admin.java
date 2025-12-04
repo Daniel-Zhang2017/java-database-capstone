@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "admins")
+@Table(name = "admin")
 public class Admin {
 
     @Id
