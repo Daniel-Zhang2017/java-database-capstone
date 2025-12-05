@@ -1,94 +1,507 @@
-/*this is the style sheet for the adminDashboard. */
+/* this is the style sheet for the adminDashboard. */
 
-/* 
-Global Reset (`*`)
+/* Universal Styling - Reset and base setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-* Purpose: Ensure consistent layout across all browsers.
-* Properties:
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
 
-  * `margin: 0` — removes default outer spacing from all elements.
-  * `padding: 0` — removes default inner spacing.
-  * `box-sizing: border-box` — ensures padding and borders are included within the total width/height of elements.
+/* Layout and Wrappers */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
 
-Base HTML & Body (`html, body`)
+.main-content {
+    flex-grow: 1;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    background-image: url("index.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-* Purpose: Establish a full-height layout and apply a standard font across the page.
-* Properties:
+/* Dashboard Header */
+h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #003e3e;
+    font-weight: 700;
+}
 
-  * `height: 100%` — allows containers to stretch to the full viewport height.
-  * `font-family: Arial, sans-serif` — applies a clean, readable sans-serif font.
+/* Interactive Elements */
+.dashboard-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-Main Layout Wrapper (`.wrapper`)
+/* Search Bar */
+.search-section {
+    flex: 1;
+    min-width: 300px;
+}
 
-* Purpose: Create a flexible, vertical layout that fills the entire screen.
-* Properties:
+.search-input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
 
-  * `display: flex` — enables flexbox for layout control.
-  * `flex-direction: column` — stacks children vertically.
-  * `min-height: 100vh` — ensures the wrapper always covers full screen height.
+.search-input:focus {
+    border-color: #A62B1F;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166, 43, 31, 0.1);
+}
 
-Section Heading (`h2`)
+/* Filter Dropdowns */
+.filter-section {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-* Purpose: Style the headings prominently for section separation.
-* Properties:
+.filter-dropdown {
+    padding: 14px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    min-width: 180px;
+    transition: all 0.3s ease;
+}
 
-  * `font-size: 32px` — makes the heading large and noticeable.
-  * `font-weight: bold` — emphasizes text.
-  * `margin-bottom: 50px` — creates space below the heading.
-  * `color: #003e3e` — uses a strong teal for visual anchoring.
+.filter-dropdown:focus {
+    border-color: #A62B1F;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166, 43, 31, 0.1);
+}
 
-Main Content Section (`.main-content`)
+/* Button Styles */
+.button {
+    background-color: #A62B1F;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 28px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
 
-* Purpose: Layout the main content with padding and a background image.
-* Properties:
+.button:hover {
+    background-color: #8c2218;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(166, 43, 31, 0.2);
+}
 
-  * `flex-grow: 1` — lets the content fill the available vertical space.
-  * `padding: 40px` — adds internal spacing around content.
-  * `display: flex` and `flex-direction: column` — organizes content in a vertical stack.
-  * `text-align: center` — centers the text.
-  * `background-image: url("index.png")` — sets a full-screen dashboard background.
-  * `background-size: cover` — ensures the image covers the whole section.
-  * `background-position: center` — centers the image.
-  * `background-repeat: no-repeat` — avoids tiling the image.
-  * `background-attachment: fixed` — fixes the image while scrolling.
+/* Add Doctor Button */
+.add-doctor-btn {
+    background-color: #003e3e;
+}
 
-Primary Button (`button`)
+.add-doctor-btn:hover {
+    background-color: #002a2a;
+}
 
-* Purpose: Design prominent, interactive buttons for main actions.
+/* Admin Button */
+.adminBtn {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+    width: 120px;
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-* Properties:
+.adminBtn:hover {
+    color: #A62B1F;
+    background-color: #e9e9e9;
+    transform: translateY(-1px);
+}
 
-  * `background-color: #A62B1F` — sets a bold red color.
-  * `color: white` — makes text stand out.
-  * `border: none` — removes any outline/border.
-  * `border-radius: 12px` — creates rounded corners.
-  * `padding: 10px 20px` — gives space inside the button.
-  * `margin-top: 20px` — adds spacing above the button.
-  * `width: 200px` — ensures consistent button width.
-  * `cursor: pointer` — shows a hand icon on hover.
-  * `font-size: 16px` — makes the text readable.
+/* Doctor Cards and Content Area */
+.doctor-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 20px;
+    justify-content: flex-start;
+}
 
-* On Hover:
+.doctor-card {
+    flex: 0 0 calc(33.333% - 20px);
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    min-width: 300px;
+}
 
-  * Retains the same red background to maintain branding.
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-color: #A62B1F;
+}
 
-Admin Button (`.adminBtn`)
+.doctor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
 
-* Purpose: Provide a secondary button style for admin-specific actions.
+.doctor-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #003e3e;
+}
 
-* Properties:
+.doctor-specialty {
+    font-size: 16px;
+    color: #A62B1F;
+    font-weight: 600;
+    background-color: rgba(166, 43, 31, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
 
-  * `background-color: #f4f4f4` — uses a light grey background.
-  * `color: #333` — uses dark text for contrast.
-  * `font-weight: bold` — emphasizes text.
-  * `width: 110px` — smaller, compact width.
-  * `padding: 10px 0` — vertical padding only.
-  * `border: none` — clean look.
-  * `cursor: pointer` — indicates it's clickable.
+.doctor-details {
+    margin-top: 20px;
+}
 
-* On Hover**:
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
 
-   Changes text color to `#A62B1F` for brand consistency while keeping the background same.
+.detail-item i {
+    margin-right: 10px;
+    color: #A62B1F;
+    width: 20px;
+    text-align: center;
+}
 
+/* Card Actions */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
 
-*/
+.edit-btn, .delete-btn {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 600;
+}
+
+.edit-btn {
+    background-color: #003e3e;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #002a2a;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #ffcdd2;
+}
+
+.delete-btn:hover {
+    background-color: #ffcdd2;
+    color: #b71c1c;
+    transform: translateY(-1px);
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
+    color: #666;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.close:hover {
+    color: #A62B1F;
+    background-color: #f5f5f5;
+}
+
+.modal-body-content {
+    padding: 40px 30px 30px;
+}
+
+/* Modal Form Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.form-input:focus {
+    border-color: #A62B1F;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166, 43, 31, 0.1);
+}
+
+.form-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #A62B1F;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166, 43, 31, 0.1);
+}
+
+/* Modal Buttons */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.modal-actions .button {
+    flex: 1;
+}
+
+/* Loading and Empty States */
+.loading-state {
+    width: 100%;
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.empty-state {
+    width: 100%;
+    text-align: center;
+    padding: 80px 20px;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.empty-state h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #003e3e;
+}
+
+.empty-state p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .doctor-card {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 900px) {
+    .dashboard-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-section, .filter-section {
+        width: 100%;
+    }
+    
+    .filter-section {
+        justify-content: space-between;
+    }
+    
+    .filter-dropdown {
+        flex: 1;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px;
+    }
+    
+    .doctor-card {
+        flex: 0 0 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+    
+    .button {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+    
+    .modal-body-content {
+        padding: 30px 20px 20px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}

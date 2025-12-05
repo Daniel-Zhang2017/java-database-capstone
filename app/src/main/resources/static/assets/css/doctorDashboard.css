@@ -1,65 +1,302 @@
-/* This is the style sheet for the doctorDashboard.html */
-/* 
-**Table Header (`.table-header`)**
+/* doctorDashboard.css - Styles for Doctor Dashboard */
 
-* Set font size to `24px` for clear emphasis.
-* Use a dark teal color (`#015c5d`) for consistency with the theme.
-* Add `30px` bottom margin and remove right margin.
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-**Table Styling (`table`)**
+html, body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
 
-* Make the table full width (`100%`).
-* Collapse borders for clean lines.
-* Use a `sans-serif` font.
-* Add `20px` top margin for spacing.
+/* ===== LAYOUT STYLES ===== */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
-**Table Head (`thead`)**
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
 
-* Set a very light dark background (`#33333310`) for header row.
-* Use white text color (`#fff`).
+/* ===== SEARCH & FILTER STYLES ===== */
+.search-section,
+.filter-section {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
 
-**Table Cells (`td, th`)**
+.search-input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #f9fafb;
+}
 
-* Apply padding of `12px 16px` for spacing.
-* Center-align the text.
-* Add a subtle bottom border (`1px solid #ddd`).
+.search-input:focus {
+    outline: none;
+    border-color: #015c5d;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(1, 92, 93, 0.1);
+}
 
-**Table Row Styling**
+.filter-btn {
+    padding: 12px 24px;
+    background-color: #015c5d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
 
-* Alternate row colors for better readability:
+.filter-btn:hover {
+    background-color: #017d7e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(1, 92, 93, 0.2);
+}
 
-  * Even rows: semi-transparent light grey (`#f9f9f959`).
-  * Odd rows: soft white background (`#ffffffc0`).
-* On hover: highlight row with a light teal overlay (`#015c5d39`).
+.filter-btn:active {
+    transform: translateY(0);
+}
 
-**Prescription Button (`.prescription-btn`)**
+.date-input {
+    padding: 11px 16px;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+}
 
-* Set size to `30px x 30px`.
-* Make it interactive with a pointer cursor.
-* Add transition effects for scale and brightness on hover.
-* On hover:
+.date-input:focus {
+    outline: none;
+    border-color: #015c5d;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(1, 92, 93, 0.1);
+}
 
-  * Slightly enlarge (`scale(1.1)`)
-  * Brighten appearance
-* On click: slightly shrink (`scale(0.95)`).
+/* ===== TABLE STYLES ===== */
+.table-section {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
 
-**No Record Message (`.noPatientRecord`)**
+.patient-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
 
-* Use a `16px` italic grey font to indicate no data gently.
+.patient-table thead {
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+}
 
-**Today Button (`.today-btn`)**
+.patient-table th {
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
 
-* Add right margin (`10px`).
-* Add padding (`10px`).
-* Set background color to teal green (`#015c5d`).
+.patient-table th:first-child {
+    border-top-left-radius: 8px;
+}
 
-**Date Picker (`.date-picker`)**
+.patient-table th:last-child {
+    border-top-right-radius: 8px;
+}
 
-* Add left margin (`10px`) and top margin (`13px`).
-* Round corners with `8px` radius.
-* Add padding (`10px`) and set fixed height (`30px`).
+.patient-table tbody tr {
+    border-bottom: 1px solid #eef2f7;
+    transition: all 0.2s ease;
+}
 
----
+.patient-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
 
-Let me know if you'd like a consolidated style guide for the entire HospitalCRM frontend.
- */
+.patient-table tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+.patient-table tbody tr:hover {
+    background-color: rgba(1, 92, 93, 0.08);
+    cursor: pointer;
+}
+
+.patient-table td {
+    padding: 16px 20px;
+    color: #4a5568;
+}
+
+.patient-table td:first-child {
+    font-weight: 600;
+    color: #015c5d;
+}
+
+/* ===== PRESCRIPTION BUTTON STYLES ===== */
+.prescription-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #015c5d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.prescription-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    background-color: #017d7e;
+    box-shadow: 0 4px 8px rgba(1, 92, 93, 0.2);
+}
+
+.prescription-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===== NO RECORDS MESSAGE ===== */
+.noPatientRecord {
+    text-align: center;
+    padding: 60px 20px;
+    font-style: italic;
+    color: #718096;
+    font-size: 16px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 2px dashed #e2e8f0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .wrapper {
+        padding: 15px;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .patient-table th,
+    .patient-table td {
+        padding: 14px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+    
+    .main-content {
+        padding: 15px;
+        gap: 20px;
+    }
+    
+    .search-section,
+    .filter-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .search-input,
+    .filter-btn,
+    .date-input {
+        width: 100%;
+    }
+    
+    .patient-table {
+        font-size: 13px;
+    }
+    
+    .patient-table th,
+    .patient-table td {
+        padding: 12px 14px;
+        min-width: 120px;
+    }
+    
+    .prescription-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 12px;
+    }
+    
+    .patient-table th,
+    .patient-table td {
+        padding: 10px 12px;
+        min-width: 100px;
+    }
+    
+    .noPatientRecord {
+        padding: 40px 15px;
+        font-size: 14px;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .search-section,
+    .filter-section,
+    .prescription-btn {
+        display: none;
+    }
+    
+    .patient-table {
+        border: 1px solid #ddd;
+    }
+    
+    .patient-table th {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
