@@ -26,7 +26,7 @@ public class AppointmentController {
     //    - Inject `AppointmentService` for handling the business logic specific to appointments.
     //    - Inject the general `Service` class, which provides shared functionality like token validation and appointment checks.
     @Autowired
-    public AppointmentController(AppointmentService appointmentService, MaiService service) {
+    public AppointmentController(AppointmentService appointmentService, MainService service) {
         this.appointmentService = appointmentService;
         this.service = service;
     }

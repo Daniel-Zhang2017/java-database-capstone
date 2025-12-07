@@ -119,16 +119,16 @@ public class MainService {
             
             if (name != null && !name.isEmpty() && specialty != null && !specialty.isEmpty() && time != null && !time.isEmpty()) {
                 // Filter by name, specialty, and time
-                filteredDoctors = doctorService.filterDoctorsByNameSpecialityAndTime(name, specialty, time);
+                filteredDoctors = doctorService.filterDoctorsByNameSpecialityandTime(name, specialty, time);
             } else if (name != null && !name.isEmpty() && specialty != null && !specialty.isEmpty()) {
                 // Filter by name and specialty
-                filteredDoctors = doctorService.filterDoctorsByNameAndSpeciality(name, specialty);
+                filteredDoctors = doctorService.filterDoctorsByNameandSpeciality(name, specialty);
             } else if (name != null && !name.isEmpty() && time != null && !time.isEmpty()) {
                 // Filter by name and time
-                filteredDoctors = doctorService.filterDoctorsByNameAndTime(name, time);
+                filteredDoctors = doctorService.filterDoctorsByNameandTime(name, time);
             } else if (specialty != null && !specialty.isEmpty() && time != null && !time.isEmpty()) {
                 // Filter by specialty and time
-                filteredDoctors = doctorService.filterDoctorsBySpecialityAndTime(specialty, time);
+                filteredDoctors = doctorService.filterDoctorsBySpecialityandTime(specialty, time);
             } else if (name != null && !name.isEmpty()) {
                 // Filter by name only
                 filteredDoctors = doctorService.filterDoctorsByName(name);
