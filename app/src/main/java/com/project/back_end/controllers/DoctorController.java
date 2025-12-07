@@ -1,9 +1,9 @@
 package com.project.back_end.controllers;
 
 import com.project.back_end.models.Doctor;
-import com.project.back_end.models.Login;
+import com.project.back_end.DTO.Login;
 import com.project.back_end.services.DoctorService;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class DoctorController {
 
     private final DoctorService doctorService;
-    private final Service service;
+    private final MainService service;
 
     // 1. Set Up the Controller Class:
     //    - Annotate the class with `@RestController` to define it as a REST controller that serves JSON responses.
@@ -27,7 +27,7 @@ public class DoctorController {
     //    - Inject `DoctorService` for handling the core logic related to doctors (e.g., CRUD operations, authentication).
     //    - Inject the shared `Service` class for general-purpose features like token validation and filtering.
     @Autowired
-    public DoctorController(DoctorService doctorService, Service service) {
+    public DoctorController(DoctorService doctorService, MainService service) {
         this.doctorService = doctorService;
         this.service = service;
     }

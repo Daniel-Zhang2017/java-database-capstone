@@ -2,7 +2,7 @@ package com.project.back_end.controllers;
 
 import com.project.back_end.models.Appointment;
 import com.project.back_end.services.AppointmentService;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
-    private final Service service;
+    private final MainService service;
 
     // 1. Set Up the Controller Class:
     //    - Annotate the class with `@RestController` to define it as a REST API controller.
@@ -26,7 +26,7 @@ public class AppointmentController {
     //    - Inject `AppointmentService` for handling the business logic specific to appointments.
     //    - Inject the general `Service` class, which provides shared functionality like token validation and appointment checks.
     @Autowired
-    public AppointmentController(AppointmentService appointmentService, Service service) {
+    public AppointmentController(AppointmentService appointmentService, MaiService service) {
         this.appointmentService = appointmentService;
         this.service = service;
     }

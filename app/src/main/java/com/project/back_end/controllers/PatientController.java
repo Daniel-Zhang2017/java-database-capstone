@@ -1,9 +1,9 @@
 package com.project.back_end.controllers;
 
-import com.project.back_end.models.Login;
+import com.project.back_end.DTO.Login;
 import com.project.back_end.models.Patient;
 import com.project.back_end.services.PatientService;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class PatientController {
 
     private final PatientService patientService;
-    private final Service service;
+    private final MainService service;
 
     // 1. Set Up the Controller Class:
     //    - Annotate the class with `@RestController` to define it as a REST API controller for patient-related operations.
@@ -26,7 +26,7 @@ public class PatientController {
     //    - Inject `PatientService` to handle patient-specific logic such as creation, retrieval, and appointments.
     //    - Inject the shared `Service` class for tasks like token validation and login authentication.
     @Autowired
-    public PatientController(PatientService patientService, Service service) {
+    public PatientController(PatientService patientService, MainService service) {
         this.patientService = patientService;
         this.service = service;
     }

@@ -1,7 +1,8 @@
 package com.project.back_end.services;
 
 import com.project.back_end.models.*;
-import com.project.back_end.repositories.*;
+import com.project.back_end.repo.*;
+import com.project.back_end.DTO.Login;
 import com.project.back_end.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class Service {
+public class MainService {
     
     private final TokenService tokenService;
     private final AdminRepository adminRepository;
@@ -24,7 +25,7 @@ public class Service {
     private final PatientService patientService;
 
     @Autowired
-    public Service(TokenService tokenService,
+    public MainService(TokenService tokenService,
                    AdminRepository adminRepository,
                    DoctorRepository doctorRepository,
                    PatientRepository patientRepository,

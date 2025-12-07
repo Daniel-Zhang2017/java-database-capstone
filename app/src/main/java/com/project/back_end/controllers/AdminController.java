@@ -1,7 +1,7 @@
 package com.project.back_end.controllers;
 
 import com.project.back_end.models.Admin;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.Map;
 @RequestMapping("${api.path}" + "admin")
 public class AdminController {
 
-    private final Service service;
+    private final MainService service;
 
     // 1. Set Up the Controller Class:
     //    - Annotate the class with `@RestController` to indicate that it's a REST controller, used to handle web requests and return JSON responses.
@@ -24,7 +24,7 @@ public class AdminController {
     //    - The service handles core logic related to admin validation and token checking.
     //    - This promotes cleaner code and separation of concerns between the controller and business logic layer.
     @Autowired
-    public AdminController(Service service) {
+    public AdminController(MainService service) {
         this.service = service;
     }
 

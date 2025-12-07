@@ -1,5 +1,7 @@
 package com.project.back_end.mvc;
 
+import com.project.back_end.services.MainService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,7 @@ public class DashboardController {
     // 2. Autowire the Shared Service:
     //    - Inject the common `Service` class, which provides the token validation logic used to authorize access to dashboards.
     @Autowired
-    private Service service;
+    private MainService service;
 
     // 3. Define the `adminDashboard` Method:
     //    - Handles HTTP GET requests to `/adminDashboard/{token}`.

@@ -2,7 +2,7 @@ package com.project.back_end.controllers;
 
 import com.project.back_end.models.Prescription;
 import com.project.back_end.services.PrescriptionService;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class PrescriptionController {
     
     private final PrescriptionService prescriptionService;
-    private final Service service;
+    private final MainService service;
 
     // 1. Set Up the Controller Class:
     //    - Annotate the class with `@RestController` to define it as a REST API controller.
@@ -26,7 +26,7 @@ public class PrescriptionController {
     //    - Inject `PrescriptionService` to handle logic related to saving and fetching prescriptions.
     //    - Inject the shared `Service` class for token validation and role-based access control.
     @Autowired
-    public PrescriptionController(PrescriptionService prescriptionService, Service service) {
+    public PrescriptionController(PrescriptionService prescriptionService, MainService service) {
         this.prescriptionService = prescriptionService;
         this.service = service;
     }
