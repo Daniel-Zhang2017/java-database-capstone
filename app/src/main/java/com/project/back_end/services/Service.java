@@ -2,7 +2,7 @@ package com.project.back_end.services;
 
 import com.project.back_end.models.*;
 import com.project.back_end.repositories.*;
-import com.project.back_end.service.TokenService;
+import com.project.back_end.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

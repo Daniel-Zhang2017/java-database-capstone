@@ -3,7 +3,7 @@ package com.project.back_end.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.project.back_end.model.Patient;
+import com.project.back_end.models.Patient;
 
 // 1. Extend JpaRepository:
 //    - The repository extends JpaRepository<Patient, Long>, which provides basic CRUD functionality.

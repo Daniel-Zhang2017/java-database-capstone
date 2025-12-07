@@ -3,7 +3,7 @@ package com.project.back_end.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.project.back_end.model.Admin;
+import com.project.back_end.models.Admin;
 
 // 1. Extend JpaRepository:
 //    - The repository extends JpaRepository<Admin, Long>, which gives it basic CRUD functionality.

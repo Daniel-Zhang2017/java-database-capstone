@@ -1,8 +1,8 @@
 package com.project.back_end.services;
 
 import com.project.back_end.DTO.Login;
-import com.project.back_end.model.Appointment;
-import com.project.back_end.model.Doctor;
+import com.project.back_end.models.Appointment;
+import com.project.back_end.models.Doctor;
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
