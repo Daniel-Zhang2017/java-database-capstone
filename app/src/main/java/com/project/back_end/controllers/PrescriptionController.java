@@ -3,7 +3,7 @@ package com.project.back_end.controllers;
 import com.project.back_end.models.Prescription;
 import com.project.back_end.services.AppointmentService;
 import com.project.back_end.services.PrescriptionService;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -15,13 +15,13 @@ public class PrescriptionController {
 
     private final PrescriptionService prescriptionService;
     private final AppointmentService appointmentService;
-    private final Service service;
+    private final MainService service;
 
     // 2. Constructor injection
     //@Autowired
     public PrescriptionController(PrescriptionService prescriptionService,
                                   AppointmentService appointmentService,
-                                  Service service) {
+                                  MainService service) {
         this.prescriptionService = prescriptionService;
         this.appointmentService = appointmentService;
         this.service = service;

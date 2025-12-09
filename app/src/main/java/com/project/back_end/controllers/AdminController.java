@@ -1,8 +1,8 @@
 package com.project.back_end.controllers;
 
 import com.project.back_end.models.Admin;
-import com.project.back_end.services.Service;
-//import org.springframework.beans.factory.annotation.Autowired;
+import com.project.back_end.services.MainService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("${api.path}admin") // Base URL: /api/admin if api.path=/api/
 public class AdminController {
 
-    private final Service service;
+    private final MainService service;
 
     // 2. Constructor-based injection
     //@Autowired
-    public AdminController(Service service) {
+    public AdminController(MainService service) {
         this.service = service;
     }
 

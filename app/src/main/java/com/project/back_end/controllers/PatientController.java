@@ -4,7 +4,7 @@ import com.project.back_end.DTO.AppointmentDTO;
 import com.project.back_end.DTO.Login;
 import com.project.back_end.models.Patient;
 import com.project.back_end.services.PatientService;
-import com.project.back_end.services.Service;
+import com.project.back_end.services.MainService;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +17,11 @@ import java.util.List;
 public class PatientController {
 
     private final PatientService patientService;
-    private final Service service;
+    private final MainService service;
 
     // 2. Constructor-based injection
     //@Autowired
-    public PatientController(PatientService patientService, Service service) {
+    public PatientController(PatientService patientService, MainService service) {
         this.patientService = patientService;
         this.service = service;
     }
