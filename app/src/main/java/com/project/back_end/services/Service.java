@@ -19,6 +19,9 @@ import com.project.back_end.repo.AdminRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @org.springframework.stereotype.Service
 public class Service {
 
@@ -28,6 +31,9 @@ public class Service {
     private final DoctorService doctorService;
     private final PatientRepository patientRepository;
     private final PatientService patientService;
+
+    // 添加日志
+    private static final Logger log = LoggerFactory.getLogger(Service.class);
 
     public Service(TokenService tokenService, AdminRepository adminRepository, DoctorService doctorService,
             DoctorRepository doctorRepository, PatientRepository patientRepository,PatientService patientService) {
@@ -49,27 +55,47 @@ public class Service {
 
     public ResponseEntity<Map<String, String>> validateAdmin(Admin receivedAdmin) {
         Map<String, String> map = new HashMap<>();
+        
+        System.out.println("=== 开始验证管理员 ===");
+        System.out.println("接收到的用户名: " + receivedAdmin.getUsername());
+        System.out.println("接收到的密码: " + receivedAdmin.getPassword());
+        
         try {
+            // 1. 先检查Repository是否正常
+            System.out.println("adminRepository: " + adminRepository);
+            
+            // 2. 执行查询
             Admin admin = adminRepository.findByUsername(receivedAdmin.getUsername());
+            System.out.println("查询结果: " + admin);
+            
             if (admin != null) {
+                System.out.println("数据库中的密码: " + admin.getPassword());
+                System.out.println("接收的密码: " + receivedAdmin.getPassword());
+                
                 if (admin.getPassword().equals(receivedAdmin.getPassword())) {
-                    map.put("token", tokenService.generateToken(admin.getUsername()));
+                    System.out.println("密码匹配成功");
+                    String token = tokenService.generateToken(admin.getUsername());
+                    System.out.println("生成的token: " + token);
+                    map.put("token", token);
                     return ResponseEntity.status(HttpStatus.OK).body(map);
                 } else {
+                    System.out.println("密码不匹配");
                     map.put("error", "Password does not match");
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
                 }
             }
-            map.put("error", "invalid email id");
+            System.out.println("用户不存在");
+            map.put("error", "User not found");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
-
+    
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("=== 发生异常 ===");
+            e.printStackTrace();  // 关键：打印完整异常信息
             map.put("error", "Internal Server error");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
-
+    
     public Map<String, Object> filterDoctor(String name, String specility, String time) {
         Map<String, Object> map = new HashMap<>();
         if (!name.equals("null") && !time.equals("null") && !specility.equals("null")) {

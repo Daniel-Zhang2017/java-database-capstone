@@ -98,4 +98,42 @@ export function openModal(type) {
   if (type === 'doctorLogin') {
     document.getElementById('doctorLoginBtn').addEventListener('click', doctorLoginHandler);
   }
+  
+  // 然后在openModal函数中直接绑定
+  if (type === 'adminLogin') {
+    document.getElementById('adminLoginBtn').addEventListener('click', simpleAdminLogin);
+  }
 }
+
+// 直接在modals.js中添加一个简单的处理函数
+function simpleAdminLogin() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    console.log("尝试登录:", username, password);
+    
+    fetch('http://localhost:8080/api/simple-login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("登录响应:", data);
+      if (data.token) {
+        alert("登录成功！Token: " + data.token);
+        document.getElementById('modal').style.display = 'none';
+      } else {
+        alert("登录失败: " + (data.error || data.message));
+      }
+    })
+    .catch(error => {
+      console.error("登录错误:", error);
+      alert("网络错误");
+    });
+  }
