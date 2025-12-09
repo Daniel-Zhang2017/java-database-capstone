@@ -1,41 +1,44 @@
 package com.project.back_end.mvc;
 
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.ModelAndView;
+import com.project.back_end.services.Service;
 
 @Controller
 public class DashboardController {
 
-    // 2. Autowire the shared service (assumed name: TokenValidationService)
+
     @Autowired
-    private TokenValidationService tokenValidationService;
+    Service service;
 
-    // 3. Admin dashboard handler
     @GetMapping("/adminDashboard/{token}")
-    public ModelAndView adminDashboard(@PathVariable("token") String token) {
-        boolean isValid = tokenValidationService.validateToken(token, "admin");
-
-        if (isValid) {
-            return new ModelAndView("admin/adminDashboard");
-        } else {
-            return new ModelAndView("redirect:/");
+    public String adminDashboard(@PathVariable String token)
+    {
+        Map<String, String> map=service.validateToken(token,"admin").getBody();
+        System.out.println("map"+map);
+        if(map.isEmpty())
+        {
+            return "admin/adminDashboard";
         }
+        return "redirect:http://localhost:8080"; 
+        
     }
 
-    // 4. Doctor dashboard handler
     @GetMapping("/doctorDashboard/{token}")
-    public ModelAndView doctorDashboard(@PathVariable("token") String token) {
-        boolean isValid = tokenValidationService.validateToken(token, "doctor");
-
-        if (isValid) {
-            return new ModelAndView("doctor/doctorDashboard");
-        } else {
-            return new ModelAndView("redirect:/");
+    public String doctorDashboard(@PathVariable String token)
+    {
+        Map<String, String> map=service.validateToken(token,"doctor").getBody();
+        System.out.println("map"+map);
+        if(map.isEmpty())
+        {
+            return "doctor/doctorDashboard";
         }
+        
+        return "redirect:http://localhost:8080"; 
+        
     }
 }
-

@@ -89,20 +89,5 @@ public class TokenService {
         }
     }
 
-    public String extractEmailFromToken(String token) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'extractEmailFromToken'");
-    }
-
-    public String generateToken(Object object, String string, String username) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'generateToken'");
-    }
-
-    public Long extractDoctorIdFromToken(String token) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'extractDoctorIdFromToken'");
-    }
-
    
 }

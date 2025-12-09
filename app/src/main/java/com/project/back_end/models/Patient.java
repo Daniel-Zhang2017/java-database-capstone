@@ -1,58 +1,43 @@
 package com.project.back_end.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "patients")
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Patient name is required")
-    @Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters")
-    @Column(nullable = false)
+    @NotNull(message = "Patient name cannot be null")
+    @Size(min = 3, max = 100, message = "Patient name should be between 3 and 100 characters")
     private String name;
 
-    @NotNull(message = "Email is required")
-    @Email(message = "Email should be valid")
-    @Column(nullable = false, unique = true)
+    @NotNull(message = "Email cannot be null")
+    @Email(message = "Invalid email format")
     private String email;
 
-    @NotNull(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(nullable = false)
+    @NotNull(message = "Password cannot be null")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
-    @NotNull(message = "Phone number is required")
-    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be exactly 10 digits")
-    @Column(nullable = false, unique = true)
+    @NotNull(message = "Phone number cannot be null")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits long")
     private String phone;
 
-    @NotNull(message = "Address is required")
-    @Size(max = 255, message = "Address must be at most 255 characters")
-    @Column(nullable = false)
+    @NotNull(message = "Address cannot be null")
+    @Size(max = 255, message = "Address should not exceed 255 characters")
     private String address;
 
-    // Default constructor required by JPA
-    public Patient() {
-    }
-
-    // Parameterized constructor
-    public Patient(String name, String email, String password, String phone, String address) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.address = address;
-    }
-
     // Getters and Setters
-
     public Long getId() {
         return id;
     }
@@ -100,5 +85,5 @@ public class Patient {
     public void setAddress(String address) {
         this.address = address;
     }
-}
 
+}
