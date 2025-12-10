@@ -53,46 +53,19 @@ public class Service {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
-    public ResponseEntity<Map<String, String>> validateAdmin(Admin receivedAdmin) {
-        Map<String, String> map = new HashMap<>();
-        
-        System.out.println("=== 开始验证管理员 ===");
-        System.out.println("接收到的用户名: " + receivedAdmin.getUsername());
-        System.out.println("接收到的密码: " + receivedAdmin.getPassword());
-        
+    // 4. Validate admin login
+    public ResponseEntity<?> validateAdmin(String username, String password) {
         try {
-            // 1. 先检查Repository是否正常
-            System.out.println("adminRepository: " + adminRepository);
-            
-            // 2. 执行查询
-            Admin admin = adminRepository.findByUsername(receivedAdmin.getUsername());
-            System.out.println("查询结果: " + admin);
-            
-            if (admin != null) {
-                System.out.println("数据库中的密码: " + admin.getPassword());
-                System.out.println("接收的密码: " + receivedAdmin.getPassword());
-                
-                if (admin.getPassword().equals(receivedAdmin.getPassword())) {
-                    System.out.println("密码匹配成功");
-                    String token = tokenService.generateToken(admin.getUsername());
-                    System.out.println("生成的token: " + token);
-                    map.put("token", token);
-                    return ResponseEntity.status(HttpStatus.OK).body(map);
-                } else {
-                    System.out.println("密码不匹配");
-                    map.put("error", "Password does not match");
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
-                }
+            Admin admin = adminRepository.findByUsername(username);
+            if (admin == null || !admin.getPassword().equals(password)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Invalid username or password.");
             }
-            System.out.println("用户不存在");
-            map.put("error", "User not found");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
-    
+            String token = tokenService.generateToken(null, "admin", username);
+            return ResponseEntity.ok(token);
         } catch (Exception e) {
-            System.out.println("=== 发生异常 ===");
-            e.printStackTrace();  // 关键：打印完整异常信息
-            map.put("error", "Internal Server error");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Login failed due to an internal error.");
         }
     }
     

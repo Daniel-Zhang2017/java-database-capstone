@@ -15,7 +15,7 @@ import com.project.back_end.models.Admin;
 import com.project.back_end.services.Service;
 
 @RestController
-@RequestMapping("${api.path}" + "admin")
+@RequestMapping("${api.path}admin")
 public class AdminController {
 
     private final Service service;
@@ -25,10 +25,10 @@ public class AdminController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<Map<String, String>> adminLogin(@RequestBody Admin admin)
+    @PostMapping("/login")
+    public ResponseEntity<?> adminLogin(@RequestBody Admin admin)
     {
-        return service.validateAdmin(admin);
+        return service.validateAdmin(admin.getUsername(), admin.getPassword());
     }
 
 
