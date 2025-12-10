@@ -28,7 +28,7 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseEntity<?> adminLogin(@RequestBody Admin admin)
     {
-        return service.validateAdmin(admin.getUsername(), admin.getPassword());
+        return service.validateAdmin(admin);
     }
 
 
