@@ -169,7 +169,7 @@ public class DebugController {
                 response.put("message", "登录成功（数据库验证）");
                 response.put("token", token);
                 response.put("username", admin.getUsername());
-                response.put("user_id", admin.getId());
+                //response.put("user_id", admin.getId());
                 response.put("timestamp", new Date());
                 
                 return ResponseEntity.ok(response);
@@ -177,10 +177,13 @@ public class DebugController {
                 System.out.println("密码不匹配");
                 response.put("status", "error");
                 response.put("message", "密码错误");
-                response.put("debug", {
-                    "stored_password_length": admin.getPassword() != null ? admin.getPassword().length() : 0,
-                    "input_password_length": password != null ? password.length() : 0
-                });
+                
+                // 修复语法错误：使用Map创建debug信息
+                Map<String, Object> debugInfo = new HashMap<>();
+                debugInfo.put("stored_password_length", admin.getPassword() != null ? admin.getPassword().length() : 0);
+                debugInfo.put("input_password_length", password != null ? password.length() : 0);
+                response.put("debug", debugInfo);
+                
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             }
             
@@ -272,7 +275,7 @@ public class DebugController {
                 
                 for (Admin admin : allAdmins) {
                     Map<String, Object> adminInfo = new HashMap<>();
-                    adminInfo.put("id", admin.getId());
+                    //adminInfo.put("id", admin.getId());
                     adminInfo.put("username", admin.getUsername());
                     adminInfo.put("password", admin.getPassword());
                     adminInfo.put("password_length", admin.getPassword() != null ? admin.getPassword().length() : 0);
