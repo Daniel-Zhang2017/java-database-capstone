@@ -60,7 +60,7 @@ public class Service {
             Admin admin = adminRepository.findByUsername(receivedAdmin.getUsername());
             if (admin != null) {
                 if (admin.getPassword().equals(receivedAdmin.getPassword())) {
-                    map.put("token", tokenService.generateToken(admin.getUsername()));
+                    map.put("token", tokenService.generateToken("admin", admin.getUsername()));
                     return ResponseEntity.status(HttpStatus.OK).body(map);
                 } else {
                     map.put("error", "Password does not match");

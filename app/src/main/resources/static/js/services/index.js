@@ -8,10 +8,10 @@ const DOCTOR_API = API_BASE_URL + '/doctor/login';
 function selectRole(role) {
   switch(role) {
     case 'admin':
-      window.location.href = '/admin/dashboard.html';
+      window.location.href = '/adminDashboard/${encodeURIComponent(token)}';
       break;
     case 'doctor':
-      window.location.href = '/doctor/dashboard.html';
+      window.location.href = '/doctorDashboard/${encodeURIComponent(token)}';
       break;
     default:
       console.error('Unknown role:', role);
@@ -65,7 +65,9 @@ window.adminLoginHandler = async function () {
       const result = await response.json();
       localStorage.setItem('token', result.token);
       localStorage.setItem('role', 'admin'); // 保存角色信息
-      selectRole('admin');
+      // 立即跳转，不要等待
+      window.location.href = `/adminDashboard/${result.token}`;
+      //selectRole('admin');
     } else {
       const errorData = await response.json().catch(() => ({}));
       alert(errorData.message || 'Invalid credentials!');
