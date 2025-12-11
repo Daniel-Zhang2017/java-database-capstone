@@ -36,16 +36,9 @@ window.onload = function () {
   }
 };
 
-// 管理员登录 - 使用不同ID
 window.adminLoginHandler = async function () {
-  // 方案A：使用不同ID
   const username = document.getElementById('admin-username')?.value;
   const password = document.getElementById('admin-password')?.value;
-
-  // 或者方案B：在模态框内查找
-  // const modal = document.querySelector('#adminLoginModal');
-  // const username = modal?.querySelector('.username-input')?.value;
-  // const password = modal?.querySelector('.password-input')?.value;
 
   if (!username || !password) {
     alert("Please enter both username and password.");
@@ -64,21 +57,19 @@ window.adminLoginHandler = async function () {
     if (response.ok) {
       const result = await response.json();
       localStorage.setItem('token', result.token);
-      localStorage.setItem('role', 'admin'); // 保存角色信息
-      // 立即跳转，不要等待
-      window.location.href = `/adminDashboard/${result.token}`;
-      //selectRole('admin');
+      localStorage.setItem('role', 'admin');
+      // 直接跳转
+      window.location.href = `/adminDashboard/${encodeURIComponent(result.token)}`;
     } else {
       const errorData = await response.json().catch(() => ({}));
-      alert(errorData.message || 'Invalid credentials!');
+      alert(errorData.error || 'Invalid credentials!');
     }
   } catch (error) {
     console.error('Admin login failed:', error);
-    alert('Network error. Please try again later. {}');
+    alert('Network error. Please try again later.');
   }
 };
 
-// 医生登录 - 使用不同ID
 window.doctorLoginHandler = async function () {
   const email = document.getElementById('doctor-email')?.value;
   const password = document.getElementById('doctor-password')?.value;
@@ -99,13 +90,13 @@ window.doctorLoginHandler = async function () {
 
     if (response.ok) {
       const result = await response.json();
-      console.log('Doctor login result:', result);
       localStorage.setItem('token', result.token);
-      localStorage.setItem('role', 'doctor'); // 保存角色信息
-      selectRole('doctor');
+      localStorage.setItem('role', 'doctor');
+      // 直接跳转，不使用selectRole
+      window.location.href = `/doctorDashboard/${encodeURIComponent(result.token)}`;
     } else {
       const errorData = await response.json().catch(() => ({}));
-      alert(errorData.message || 'Invalid credentials!');
+      alert(errorData.error || 'Invalid credentials!');
     }
   } catch (error) {
     console.error('Doctor login failed:', error);

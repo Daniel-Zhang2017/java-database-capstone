@@ -19,9 +19,6 @@ import com.project.back_end.repo.AdminRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @org.springframework.stereotype.Service
 public class Service {
 
@@ -31,9 +28,6 @@ public class Service {
     private final DoctorService doctorService;
     private final PatientRepository patientRepository;
     private final PatientService patientService;
-
-    // 添加日志
-    private static final Logger log = LoggerFactory.getLogger(Service.class);
 
     public Service(TokenService tokenService, AdminRepository adminRepository, DoctorService doctorService,
             DoctorRepository doctorRepository, PatientRepository patientRepository,PatientService patientService) {
@@ -53,14 +47,13 @@ public class Service {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
-    // 4. Validate admin login
     public ResponseEntity<Map<String, String>> validateAdmin(Admin receivedAdmin) {
         Map<String, String> map = new HashMap<>();
         try {
             Admin admin = adminRepository.findByUsername(receivedAdmin.getUsername());
             if (admin != null) {
                 if (admin.getPassword().equals(receivedAdmin.getPassword())) {
-                    map.put("token", tokenService.generateToken("admin", admin.getUsername()));
+                    map.put("token", tokenService.generateToken(admin.getUsername()));
                     return ResponseEntity.status(HttpStatus.OK).body(map);
                 } else {
                     map.put("error", "Password does not match");
@@ -76,7 +69,7 @@ public class Service {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
-    
+
     public Map<String, Object> filterDoctor(String name, String specility, String time) {
         Map<String, Object> map = new HashMap<>();
         if (!name.equals("null") && !time.equals("null") && !specility.equals("null")) {
