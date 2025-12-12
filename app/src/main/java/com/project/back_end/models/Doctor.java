@@ -1,7 +1,5 @@
 package com.project.back_end.models;
 
-
-
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
