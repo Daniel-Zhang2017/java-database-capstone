@@ -11,4 +11,4 @@
  *   fetch(`${API_BASE_URL}/api/appointments`)
  */
 
-export const API_BASE_URL = "https://hhzhang6c-8080.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/";
+export const API_BASE_URL = "https://hhzhang6c-8080.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai";
